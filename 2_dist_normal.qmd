@@ -120,6 +120,9 @@ cat("No negatividad: f(x) > 0 para todo x ∈ ℝ\n")
 El parámetro $\mu$ controla la **posición** de la distribución en el eje x:
 
 ```{r efecto-mu}
+#| fig-align: center
+
+
 # Visualizar efecto de μ (σ fijo)
 x_vals <- seq(-6, 10, length.out = 1000)
 sigma_fijo <- 1.5
@@ -146,17 +149,34 @@ ggplot(df_mu, aes(x = x, y = y, color = parametro)) +
        x = "x", y = "f(x)",
        color = "Parámetro μ") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
+  
 ```
 
 **Efecto del Parámetro de Escala ($\sigma$)**
 
-El parámetro $\sigma$ controla la **dispersión** de la distribució, cuanto mayor es $\sigma$, más dispersos son los datos. A continuación se muestran las gráficas de la función de densidad de la distribución normal fijando el valor de la media $\mu = 2$ con diferentes valores de la desviación estándar.
+El parámetro $\sigma$ controla la **dispersión** de la distribución, cuanto mayor es $\sigma$, más dispersos son los datos. A continuación se muestran las gráficas de la función de densidad de la distribución normal fijando el valor de la media $\mu = 2$ con diferentes valores de la desviación estándar.
 
 
 
 ```{r efecto-sigma}
+#| fig-align: center
+
 # Visualizar efecto de σ (μ fijo)
 mu_fijo <- 2
 sigmas <- c(0.5, 1, 1.5, 2.5)
@@ -174,14 +194,29 @@ for (sigma in sigmas) {
 
 ggplot(df_sigma, aes(x = x, y = y, color = parametro)) +
   geom_line(linewidth = 1) +
+  scale_color_manual(values = c("red", "green", "blue", "purple")) +
   geom_vline(xintercept = mu_fijo, linetype = "dashed", color = "black", alpha = 0.7) +
   labs(title = "Efecto del Parámetro de Escala σ",
        subtitle = "Cambio en la dispersión de la distribución",
        x = "x", y = "f(x)",
        color = "Parámetro σ") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 
@@ -209,6 +244,7 @@ $$f''(\mu \pm \sigma) = 0$$
 
 ```{r}
 #| label: puntos-inflexion
+#| fig-align: center
 
 # Visualizar puntos de inflexión
 mu_inf <- 3
@@ -227,17 +263,31 @@ ggplot(data.frame(x = x_inf, y = y_inf), aes(x = x, y = y)) +
   geom_vline(xintercept = inflexion_x, color = "green", linetype = "dotted", linewidth = 1) +
   annotate("point", x = inflexion_x, y = inflexion_y, color = "olivedrab", size = 4) +
   annotate("label", x = mu_inf, y = max(y_inf) * 1.1, 
-           label = paste("μ =", mu_inf), color = "red", size = 4) +
-  annotate("label", x = inflexion_x[1], y = inflexion_y[1] + 0.02,
-           label = "μ - σ", color = "olivedrab", size = 3.5) +
-  annotate("label", x = inflexion_x[2], y = inflexion_y[2] + 0.02,
-           label = "μ + σ", color = "olivedrab", size = 3.5) +
+           label = paste("μ =", mu_inf), color = "red", size = 5) +
+  annotate("label", x = inflexion_x[1], y = inflexion_y[1] + 0.04,
+           label = "μ - σ", color = "olivedrab", size = 5) +
+  annotate("label", x = inflexion_x[2], y = inflexion_y[2] + 0.04,
+           label = "μ + σ", color = "olivedrab", size = 5) +
   labs(title = "Propiedades Geométricas de la PDF Normal",
        subtitle = paste("N(", mu_inf, ",", sigma_inf, ") - Puntos de inflexión en μ ± σ"),
        x = "x", y = "f(x)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 **4. Comportamiento Asintótico**
@@ -258,6 +308,9 @@ La **distribución normal estándar** tiene PDF:
 $$\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-\frac{z^2}{2}}$$
 
 ```{r estandarizacion}
+#| fig-align: center
+
+
 # Comparar distribución original vs estandarizada
 mu_est <- 5
 sigma_est <- 2
@@ -280,14 +333,29 @@ df_comparacion <- data.frame(
 
 ggplot(df_comparacion, aes(x = x, y = y, color = tipo)) +
   geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("blue", "orange")) +
   facet_wrap(~eje_x, scales = "free_x") +
   labs(title = "Estandarización de la Distribución Normal",
        subtitle = "Transformación Z = (X - μ)/σ",
        x = "Valor", y = "f(x) o φ(z)",
        color = "Distribución") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 ## Regla Empírica (68-95-99.7)
@@ -295,6 +363,8 @@ ggplot(df_comparacion, aes(x = x, y = y, color = tipo)) +
 Una propiedad fundamental de la distribución normal es la **regla empírica**:
 
 ```{r regla-empirica}
+#| fig-align: center
+
 # Calcular probabilidades de la regla empírica
 prob_1sigma <- pnorm(1) - pnorm(-1)  # P(-1 < Z < 1)
 prob_2sigma <- pnorm(2) - pnorm(-2)  # P(-2 < Z < 2)
@@ -328,27 +398,41 @@ phi_2sigma <- dnorm(z_2sigma)
 phi_3sigma <- dnorm(z_3sigma)
 
 ggplot(data.frame(z = z_seq, phi = phi_vals), aes(x = z, y = phi)) +
-  geom_line(linewidth = 1.5, color = "black") +
-  geom_area(data = data.frame(z = z_1sigma, phi = phi_1sigma),
-            aes(x = z, y = phi), fill = "red", alpha = 0.3) +
-  geom_area(data = data.frame(z = z_2sigma, phi = phi_2sigma),
-            aes(x = z, y = phi), fill = "orange", alpha = 0.3) +
+  geom_line(linewidth = 1, color = "black") +
   geom_area(data = data.frame(z = z_3sigma, phi = phi_3sigma),
-            aes(x = z, y = phi), fill = "yellow", alpha = 0.3) +
+            aes(x = z, y = phi), fill = "yellow", alpha = 1) +
+  geom_area(data = data.frame(z = z_2sigma, phi = phi_2sigma),
+            aes(x = z, y = phi), fill = "orange", alpha = 1) +
+  geom_area(data = data.frame(z = z_1sigma, phi = phi_1sigma),
+            aes(x = z, y = phi), fill = "red", alpha = 1) +
   geom_vline(xintercept = c(-3, -2, -1, 0, 1, 2, 3), 
              linetype = "dashed", alpha = 0.6) +
-  annotate("text", x = 0, y = 0.2, label = "68%", size = 4, fontface = "bold") +
-  annotate("text", x = 1.5, y = 0.1, label = "13.5%", size = 3.5) +
-  annotate("text", x = -1.5, y = 0.1, label = "13.5%", size = 3.5) +
-  annotate("text", x = 2.5, y = 0.05, label = "2.35%", size = 3) +
-  annotate("text", x = -2.5, y = 0.05, label = "2.35%", size = 3) +
+  annotate("label", x = 0, y = 0.2, label = "68%", size = 4, fontface = "bold") +
+  annotate("label", x = 1.5, y = 0.075, label = "13.5%", size = 3.5) +
+  annotate("label", x = -1.5, y = 0.075, label = "13.5%", size = 3.5) +
+  annotate("label", x = 2.5, y = 0.05, label = "2.35%", size = 3) +
+  annotate("label", x = -2.5, y = 0.05, label = "2.35%", size = 3) +
   labs(title = "Regla Empírica 68-95-99.7",
        subtitle = "Distribución de probabilidades en intervalos estándar",
        x = "Z (desviaciones estándar desde la media)",
        y = "φ(z)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 ## Propiedades de la Función de Distribución Acumulativa
@@ -391,7 +475,7 @@ Una propiedad crucial es la **simetría** respecto a la media:
 
 $$F(\mu + x) + F(\mu - x) = 1$$
 
-Verificación numérica:
+Verificación numérica considerando $\mu=2$, $\sigma=1$ y $x=1.5$:
 
 ```{r simetria-cdf}
 # Demostrar simetría de la CDF
@@ -408,7 +492,6 @@ cdf_der <- pnorm(punto_der, mu_sim, sigma_sim)
 cdf_izq <- pnorm(punto_izq, mu_sim, sigma_sim)
 suma_simetria <- cdf_der + cdf_izq
 
-cat("Distribución: N(", mu_sim, ",", sigma_sim, ")\n")
 cat("Puntos: μ - x =", punto_izq, ", μ + x =", punto_der, "\n")
 cat("F(μ - x) =", round(cdf_izq, 4), "\n")
 cat("F(μ + x) =", round(cdf_der, 4), "\n")
@@ -421,6 +504,8 @@ cat("¿F(μ + x) + F(μ - x) = 1?", abs(suma_simetria - 1) < 1e-10, "\n")
 ### Efecto de los Parámetros en la CDF
 
 ```{r visualizacion-cdf}
+#| fig-align: center
+
 # Visualizar CDFs con diferentes parámetros
 x_range_cdf <- seq(-6, 10, length.out = 1000)
 
@@ -460,6 +545,7 @@ df_cdf_efectos <- rbind(df_mu_cdf, df_sigma_cdf)
 # Crear gráfico
 ggplot(df_cdf_efectos, aes(x = x, y = y, color = parametro)) +
   geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("red", "green", "blue", "purple", "orange", "firebrick", "coral", "darkgreen")) + 
   geom_hline(yintercept = c(0, 0.5, 1), linetype = "dashed", alpha = 0.5) +
   facet_wrap(~tipo, scales = "free_x", ncol = 2) +
   labs(title = "Función de Distribución Acumulativa - Distribución Normal",
@@ -467,14 +553,31 @@ ggplot(df_cdf_efectos, aes(x = x, y = y, color = parametro)) +
        x = "x", y = "F(x) = P(X ≤ x)",
        color = "Parámetro") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)) +
-  ylim(0, 1)
+  ylim(0, 1)+
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 **Comparación: PDF vs CDF**
 
 ```{r pdf-vs-cdf-normal}
+#| fig-align: center
+
+
 # Comparar PDF y CDF lado a lado
 mu_comp <- 3
 sigma_comp <- 1.2
@@ -490,14 +593,30 @@ df_comparacion_normal <- data.frame(
   tipo = rep(c("PDF: f(x)", "CDF: F(x)"), each = length(x_comp))
 )
 
-ggplot(df_comparacion_normal, aes(x = x, y = y)) +
-  geom_line(linewidth = 1.2, color = "blue") +
+ggplot(df_comparacion_normal, aes(x = x, y = y, color = tipo)) +
+  geom_line(linewidth = 1.2, show.legend =FALSE) +
+  scale_color_manual(values = c("blue", "orange")) +
   geom_vline(xintercept = mu_comp, linetype = "dashed", color = "red", alpha = 0.7) +
   facet_wrap(~tipo, scales = "free_y", ncol = 2) +
   labs(title = paste("Comparación PDF vs CDF: N(", mu_comp, ",", sigma_comp, ")"),
        x = "x", y = "Valor de la función") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 ## Cálculo de Probabilidades
@@ -557,6 +676,8 @@ kable(tabla_prob,
 **Visualización del Área Bajo la Curva**
 
 ```{r area-bajo-curva}
+#| fig-align: center
+
 # Crear visualización del área bajo la curva
 x_area <- seq(mu_prob - 4*sigma_prob, mu_prob + 4*sigma_prob, length.out = 1000)
 pdf_area <- dnorm(x_area, mean = mu_prob, sd = sigma_prob)
@@ -582,8 +703,22 @@ ggplot(data.frame(x = x_area, y = pdf_area), aes(x = x, y = y)) +
        x = "x", y = "f(x)",
        caption = "El área sombreada representa la probabilidad del intervalo") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 ## Cuantiles de la Distribución Normal
@@ -654,6 +789,8 @@ kable(valores_criticos,
 ### Visualización de Cuantiles en la CDF
 
 ```{r visualizacion-cuantiles}
+#| fig-align: center
+
 # Mostrar cuantiles en el gráfico de CDF
 mu_q <- 10
 sigma_q <- 3
@@ -677,13 +814,28 @@ ggplot(data.frame(x = x_q, y = cdf_q), aes(x = x, y = y)) +
   geom_vline(xintercept = q_vals, linetype = "dashed", color = "red", alpha = 0.7) +
   geom_point(data = df_cuantiles, aes(x = x, y = y), 
              color = "red", size = 3) +
-  geom_text(data = df_cuantiles, aes(x = x, y = y, label = etiqueta),
-            vjust = -0.5, hjust = 0.5, size = 3.5) +
+  geom_text(data = df_cuantiles, aes(x = x-1.5, y = y, label = etiqueta),
+            vjust = -0.5, hjust = 0.5, size = 4.5) +
   labs(title = paste("Cuantiles en la CDF: N(", mu_q, ",", sigma_q, ")"),
        x = "x", y = "F(x)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  ylim(0, 1)
+  ylim(0, 1) +
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 
@@ -698,6 +850,8 @@ Para la distribución normal estándar:
 3. **Intervalo simétrico**: $P(-z < Z < z) = 2\Phi(z) - 1$
 
 ```{r propiedades-simetria}
+#| fig-align: center
+
 # Verificar propiedades de simetría
 z_simetria <- c(0.5, 1, 1.5, 2, 2.5, 3)
 
@@ -745,8 +899,22 @@ ggplot(data.frame(z = z_sym, phi = phi_sym, cdf = cdf_sym)) +
        subtitle = "Las áreas sombreadas son iguales",
        x = "z", y = "φ(z)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 
@@ -827,6 +995,8 @@ tabla_principales <- resultados_simulacion[, c("n", "media_muestral", "media_teo
                                                "varianza_muestral", "varianza_teorica", "error_varianza",
                                                "desv_std_muestral", "desv_std_teorica", "error_desv_std")]
 
+rownames(tabla_principales) <- NULL
+
 kable(tabla_principales,
       caption = "Convergencia de estadísticos muestrales hacia valores teóricos",
       digits = 3,
@@ -842,6 +1012,7 @@ kable(tabla_principales,
 
 ```{r ley-grandes-numeros}
 #| warning: false
+#| fig-align: center
 
 # Generar una secuencia larga para observar convergencia
 n_total <- 15000
@@ -870,7 +1041,23 @@ p1 <- ggplot(df_convergencia, aes(x = n)) +
        y = "Media acumulada",
        caption = paste("Línea roja: Media teórica =", media_teorica)) +
   theme_minimal() +
-  ylim(media_teorica - 2, media_teorica + 2)
+  ylim(media_teorica - 2, media_teorica + 2)+
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 
 # Gráfico de convergencia de la desviación estándar
 p2 <- ggplot(df_convergencia, aes(x = n)) +
@@ -881,7 +1068,23 @@ p2 <- ggplot(df_convergencia, aes(x = n)) +
        y = "Desviación estándar acumulada",
        caption = paste("Línea roja: DE teórica =", desv_std_teorica)) +
   theme_minimal() +
-  ylim(desv_std_teorica - 2, desv_std_teorica + 2)
+  ylim(desv_std_teorica - 2, desv_std_teorica + 2)+
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 
 # Mostrar ambos gráficos
 grid.arrange(p1, p2, ncol = 2,
@@ -891,6 +1094,8 @@ grid.arrange(p1, p2, ncol = 2,
 **Comparación Histograma vs Densidad Teórica**
 
 ```{r histograma-densidad}
+#| fig-align: center
+
 # Generar muestra grande para comparación visual
 muestra_grande <- rnorm(10000, mean = mu_sim, sd = sigma_sim)
 
@@ -909,8 +1114,22 @@ ggplot(data.frame(x = muestra_grande), aes(x = x)) +
        y = "Densidad",
        caption = "Curva roja: Densidad teórica | Línea roja: μ | Líneas naranjas: μ ± σ") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 **Verificación de la Regla Empírica**
@@ -969,6 +1188,9 @@ kable(verificacion_regla,
 Una fábrica produce tornillos cuyo diámetro sigue una distribución normal con media $\mu = 8.00 mm$ y desviación estándar $\sigma = 0.15 mm$. Los tornillos se consideran defectuosos si su diámetro está fuera del rango [7.70, 8.30] mm.
 
 ```{r ejemplo-manufactura}
+#| fig-align: center
+
+
 # Parámetros del proceso
 mu_tornillos <- 8.00  # mm
 sigma_tornillos <- 0.15  # mm
@@ -1027,8 +1249,22 @@ ggplot(data.frame(diametro = diametros), aes(x = diametro)) +
        x = "Diámetro (mm)",
        y = "Densidad") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 :::
@@ -1043,6 +1279,7 @@ Los tiempos de respuesta de un sistema informático siguen una distribución nor
 
 ```{r ejemplo-sistema}
 #| warning: false
+#| fig-align: center
 
 # Parámetros del sistema
 mu_sistema <- 2.5  # segundos
@@ -1137,9 +1374,23 @@ ggplot(data.frame(tiempo = tiempos_respuesta), aes(x = tiempo)) +
        x = "Tiempo de respuesta (segundos)",
        y = "Densidad") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)) +
-  xlim(0, 7)
+  xlim(0, 7)+
+  theme(
+    legend.title = element_text(size=13, face="bold"),
+    legend.text = element_text(size=13),
+    plot.title = element_text(size=15, face="bold", hjust = 0.5),
+    plot.subtitle = element_text(size=13, hjust = 0.5),
+    axis.text.x=element_text(size=12),
+    axis.text.y=element_text(size=12),
+    axis.title.x = element_text(face="bold", size=13),
+    axis.title.y = element_text(face="bold", size=13)
+    # panel.grid.major.y = element_line(color = "#ECF0F1", linewidth = 0.5,
+    #   linetype = "dashed"),
+    # panel.grid.minor.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    # panel.background = element_rect(fill = "#FAFAFA", color = NA),
+    # plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 :::
@@ -1248,5 +1499,101 @@ Dos grupos toman el mismo examen. Grupo A: $N(75, 10^2)$, Grupo B: $N(82, 8^2)$.
 5. ¿A partir de qué puntuación está el 10% superior de cada grupo?
 
 :::
+
+
+
+
+# Teorema Central del Límite (TCL)
+
+El **Teorema Central del Límite** es uno de los resultados más importantes y fundamentales de la teoría de la probabilidad y estadística. Este teorema establece las condiciones bajo las cuales la suma (o media) de variables aleatorias converge a una distribución normal, independientemente de la distribución original de las variables.
+
+::: {#thm-TCL}
+Sea $X_1, X_2, X_3, \ldots$ una sucesión de variables aleatorias **independientes e idénticamente distribuidas** (i.i.d.) con:
+
+-   Media común: $E(X_i) = \mu < \infty$
+-   Varianza común: $\text{Var}(X_i) = \sigma^2 < \infty$
+
+Definamos la suma parcial: $$S_n = X_1 + X_2 + \cdots + X_n$$
+
+Entonces, la **suma estandarizada** converge en distribución a una normal estándar:
+
+$$\frac{S_n - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0,1) \quad \text{cuando } n \to \infty$$
+
+O bien, si definimos la media muestral: $$\bar{X}_n = \frac{S_n}{n} = \frac{1}{n}\sum_{i=1}^{n} X_i$$
+
+Entonces: $$\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0,1) \quad \text{cuando } n \to \infty$$
+
+O equivalentemente: $$\bar{X}_n \xrightarrow{d} N\left(\mu, \frac{\sigma^2}{n}\right) \quad \text{cuando } n \to \infty$$
+
+:::
+
+## Notación
+
+**Convergencia en Distribución**
+
+El símbolo $\xrightarrow{d}$ denota **convergencia en distribución** (también llamada convergencia en ley o convergencia débil), lo que significa:
+
+$$\lim_{n \to \infty} P\left(\frac{S_n - n\mu}{\sigma\sqrt{n}} \leq x\right) = \Phi(x)$$
+
+donde $\Phi(x)$ es la función de distribución (o de probabilidad acumulada) de la distribución normal estándar.
+
+**Parámetros Importantes**
+
+-   $\mu$: Media poblacional de cada $X_i$
+-   $\sigma^2$: Varianza poblacional de cada $X_i$\
+-   $\sigma$: Desviación estándar poblacional
+-   $n$: Tamaño de muestra
+-   $\sigma/\sqrt{n}$: Error estándar de la media muestral
+
+## Condiciones del Teorema
+
+Para que el Teorema Central del Límite se aplique, se requieren las siguientes condiciones:
+
+**1. Independencia**
+
+Las variables aleatorias $X_1, X_2, \ldots, X_n$ deben ser **independientes**. Esto significa que el resultado de una variable no influye en el resultado de las otras.
+
+**2. Distribución Idéntica**\
+Todas las variables deben seguir la **misma distribución**, es decir: $$X_i \sim F \quad \text{para todo } i$$
+
+donde $F$ es alguna distribución de probabilidad.
+
+**3. Momentos Finitos**
+
+La distribución común debe tener:
+
+-   **Media finita**: $E(X_i) = \mu < \infty$
+-   **Varianza finita**: $\text{Var}(X_i) = \sigma^2 < \infty$
+
+**4. Tamaño de Muestra Suficiente**
+
+En la práctica, $n$ debe ser "suficientemente grande". Una **regla práctica común** es $n \geq 30$, aunque esto puede variar según la distribución original.
+
+## Interpretación del Teorema
+
+1.  **Universalidad**: Sin importar cuál sea la distribución original de las $X_i$ (uniforme, exponencial, binomial, etc.), la suma o media se aproxima a una distribución normal.
+
+2.  **Mejora con el tamaño**: La aproximación normal mejora conforme $n$ aumenta.
+
+3.  **Centralización**: La media de la distribución límite es $\mu$ (la media poblacional).
+
+4.  **Reducción de variabilidad**: La varianza de la media muestral es $\sigma^2/n$, que decrece con $n$.
+
+**Formulación Práctica**
+
+Para valores grandes de $n$, podemos escribir aproximadamente: $$S_n \sim N(n\mu, n\sigma^2)$$ $$\bar{X}_n \sim N\left(\mu, \frac{\sigma^2}{n}\right)$$
+
+## Importancia y Aplicaciones
+
+El TCL explica varios fenómenos importantes en estadística:
+
+1.  **Errores de medición**: Tienden a seguir distribución normal
+2.  **Medias muestrales**: Son aproximadamente normales para muestras grandes
+3.  **Tests estadísticos**: Los basados en normalidad funcionan bien con muestras grandes
+4.  **Intervalos de confianza**: Su construcción se basa en el TCL
+
+---
+
+<br>
 
 
