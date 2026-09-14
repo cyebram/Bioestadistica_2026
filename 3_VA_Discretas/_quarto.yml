@@ -7,10 +7,10 @@ book:
     - index.qmd
     - uniforme_discreta.qmd
     - bernoulli_binomial.qmd
-    #- geometrica.qmd
-    #- binomial_negativa.qmd
-    #- hipergeometrica.qmd
-    #- poisson.qmd
+    - geometrica.qmd
+    - binomial_negativa.qmd
+    - hipergeometrica.qmd
+    - poisson.qmd
      
     
 
@@ -25,3 +25,5 @@ format:
       body-width: 950px
       margin-width: 250px
       gutter-width: 1.5rem
+    code-fold: true
+    fig-align: "center"

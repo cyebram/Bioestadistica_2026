@@ -195,6 +195,7 @@ cat("Desviación estándar:", round(desv_std2, 4), "\n")
 
 ```{r}
 #| label: grafico-numeros
+#| code-fold: true
 #| fig-align: "center"
 #| fig-cap: "Distribución uniforme discreta entre 10 y 20"
 
