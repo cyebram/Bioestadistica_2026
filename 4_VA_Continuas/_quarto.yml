@@ -11,9 +11,9 @@ book:
     - gamma.qmd
     - beta.qmd
     - weibull.qmd
-    #- ji_cuadrada.qmd
-    #- dist_t.qmd 
-    #- dist_f.qmd 
+    - ji_cuadrada.qmd
+    - dist_t.qmd
+    - dist_f.qmd
 
 bibliography: references.bib
 
